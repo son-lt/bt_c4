@@ -31,9 +31,6 @@ class _YoutubePlayerViewState extends State<YoutubePlayerView> {
       child: YoutubePlayer(
         controller: _youtubePlayerController,
         showVideoProgressIndicator: true,
-        onReady: () {
-          _youtubePlayerController.addListener(() {});
-        },
       ),
     );
   }
