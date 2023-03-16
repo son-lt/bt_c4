@@ -28,18 +28,36 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        isPlay ? _videoPlayerController.pause() : _videoPlayerController.play();
-        setState(() {
-          isPlay = !isPlay;
-        });
-      },
-      child: Container(
-        width: 400,
-        height: 300,
-        padding: const EdgeInsets.all(20),
-        child: VideoPlayer(_videoPlayerController),
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        children: [
+          InkWell(
+            onTap: () {
+              isPlay
+                  ? _videoPlayerController.pause()
+                  : _videoPlayerController.play();
+              setState(() {
+                isPlay = !isPlay;
+              });
+            },
+            child: SizedBox(
+              width: 400,
+              height: 300,
+              child: VideoPlayer(_videoPlayerController),
+            ),
+          ),
+          const SizedBox(height: 12),
+          VideoProgressIndicator(
+            _videoPlayerController,
+            allowScrubbing: true,
+            colors: const VideoProgressColors(
+              backgroundColor: Colors.red,
+              bufferedColor: Colors.yellow,
+              playedColor: Colors.green,
+            ),
+          ),
+        ],
       ),
     );
   }
